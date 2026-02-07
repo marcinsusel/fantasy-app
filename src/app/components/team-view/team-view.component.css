@@ -1,0 +1,181 @@
+.team-view-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #f0fdf4;
+}
+
+.stats-panel {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.stat-item span {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.stat-item span.valid {
+    color: #16a34a;
+}
+
+.valid-text {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.invalid-text {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.formation-error {
+    background: #fef2f2;
+    color: #ef4444;
+    padding: 8px;
+    text-align: center;
+    font-weight: 500;
+    border-bottom: 1px solid #fee2e2;
+}
+
+.actions-panel {
+    padding: 12px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-save {
+    background: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-save:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.load-group {
+    display: flex;
+    gap: 8px;
+}
+
+.load-group input {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.btn-load {
+    background: #4b5563;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.status-message {
+    padding: 8px;
+    background: #eff6ff;
+    color: #1e40af;
+    text-align: center;
+    font-weight: 500;
+}
+
+.pitch {
+    flex-grow: 1;
+    background: #15803d;
+    /* Green pitch */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    overflow-y: auto;
+
+    /* Pitch pattern */
+    background-image: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 49px,
+            rgba(255, 255, 255, 0.1) 50px,
+            transparent 51px);
+}
+
+.pitch-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 120px;
+    position: relative;
+    z-index: 5;
+}
+
+.position-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.player-slots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.empty-slot {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    width: 140px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure player cards look good on pitch */
+::ng-deep app-team-view app-player-card .player-card {
+    width: 140px;
+    font-size: 0.9em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep app-team-view app-player-card .card-body {
+    padding: 8px;
+}
+
+::ng-deep app-team-view app-player-card button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}

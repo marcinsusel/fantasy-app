@@ -1,0 +1,19 @@
+<div class="player-card" [class.disabled]="disabled">
+  <div class="card-header" [style.background-color]="getPositionColor(player.position)">
+    <span class="position">{{ player.position }}</span>
+    <span class="cost">£{{ player.cost }}m</span>
+  </div>
+  <div class="card-body">
+    <div class="player-name">{{ player.name }}</div>
+    <div class="player-team">{{ player.team }}</div>
+  </div>
+  <div class="card-footer">
+    <button 
+      (click)="onAction()" 
+      [disabled]="disabled"
+      [class.btn-add]="actionType === 'add'"
+      [class.btn-remove]="actionType === 'remove'">
+      {{ actionLabel }}
+    </button>
+  </div>
+</div>

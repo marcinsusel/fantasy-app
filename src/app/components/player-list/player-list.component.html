@@ -1,0 +1,23 @@
+<div class="player-list-container">
+    <div class="filters">
+        <div class="search-box">
+            <input type="text" [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)"
+                placeholder="Search players...">
+        </div>
+
+        <div class="position-filters">
+            <button [class.active]="positionFilter() === ''" (click)="positionFilter.set('')">All</button>
+            <button [class.active]="positionFilter() === 'GK'" (click)="positionFilter.set('GK')">GK</button>
+            <button [class.active]="positionFilter() === 'DEF'" (click)="positionFilter.set('DEF')">DEF</button>
+            <button [class.active]="positionFilter() === 'MID'" (click)="positionFilter.set('MID')">MID</button>
+            <button [class.active]="positionFilter() === 'FWD'" (click)="positionFilter.set('FWD')">FWD</button>
+        </div>
+    </div>
+
+    <div class="player-grid">
+        <app-player-card *ngFor="let player of filteredPlayers()" [player]="player"
+            [disabled]="isPlayerSelected(player)" [actionLabel]="isPlayerSelected(player) ? 'Selected' : 'Add'"
+            (action)="addPlayer($event)">
+        </app-player-card>
+    </div>
+</div>

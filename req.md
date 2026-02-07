@@ -1,0 +1,1 @@
+let's create an angular app that let's me pick a team of 11 players from a list of all premier league players. i will only be allowed to pick one goalkeeper, 3-5 defenders, 4-5 midfielders and 3-4 attackers

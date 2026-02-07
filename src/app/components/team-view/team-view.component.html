@@ -1,0 +1,85 @@
+<div class="team-view-container">
+    <div class="stats-panel">
+        <div class="stat-item">
+            <h3>Players</h3>
+            <span [class.valid]="teamService.totalPlayers() === 11">
+                {{ teamService.totalPlayers() }}/11
+            </span>
+        </div>
+        <div class="stat-item">
+            <h3>Budget</h3>
+            <span>£{{ teamService.currentCost() }}m</span>
+        </div>
+        <div class="stat-item status">
+            <h3 *ngIf="teamService.isValidFormation()" class="valid-text">Valid Team</h3>
+            <h3 *ngIf="!teamService.isValidFormation()" class="invalid-text">Incomplete</h3>
+        </div>
+    </div>
+
+    <div class="actions-panel">
+        <button class="btn-save" (click)="saveTeam()" [disabled]="!teamService.isValidFormation()">
+            Save Team
+        </button>
+        <div class="load-group">
+            <input type="text" placeholder="Enter Squad ID" [ngModel]="loadId()" (ngModelChange)="loadId.set($event)">
+            <button class="btn-load" (click)="loadTeam()" [disabled]="!loadId()">Load</button>
+        </div>
+    </div>
+
+    <div class="status-message" *ngIf="saveStatus()">
+        {{ saveStatus() }}
+    </div>
+
+    <div class="formation-error" *ngIf="teamService.formationError()">
+        {{ teamService.formationError() }}
+    </div>
+
+    <div class="pitch">
+        <!-- Lines -->
+        <div class="pitch-line center-line"></div>
+        <div class="pitch-line penalty-area-top"></div>
+        <div class="pitch-line penalty-area-bottom"></div>
+        <div class="pitch-circle"></div>
+
+        <!-- Players -->
+        <div class="pitch-row fwd-row">
+            <div class="position-label">FWD (3-4)</div>
+            <div class="player-slots">
+                <app-player-card *ngFor="let player of attackers()" [player]="player" actionLabel="Remove"
+                    actionType="remove" (action)="removePlayer($event)">
+                </app-player-card>
+                <div class="empty-slot" *ngIf="attackers().length === 0">Select Forwards</div>
+            </div>
+        </div>
+
+        <div class="pitch-row mid-row">
+            <div class="position-label">MID (4-5)</div>
+            <div class="player-slots">
+                <app-player-card *ngFor="let player of midfielders()" [player]="player" actionLabel="Remove"
+                    actionType="remove" (action)="removePlayer($event)">
+                </app-player-card>
+                <div class="empty-slot" *ngIf="midfielders().length === 0">Select Midfielders</div>
+            </div>
+        </div>
+
+        <div class="pitch-row def-row">
+            <div class="position-label">DEF (3-5)</div>
+            <div class="player-slots">
+                <app-player-card *ngFor="let player of defenders()" [player]="player" actionLabel="Remove"
+                    actionType="remove" (action)="removePlayer($event)">
+                </app-player-card>
+                <div class="empty-slot" *ngIf="defenders().length === 0">Select Defenders</div>
+            </div>
+        </div>
+
+        <div class="pitch-row gk-row">
+            <div class="position-label">GK (1)</div>
+            <div class="player-slots">
+                <app-player-card *ngFor="let player of goalkeepers()" [player]="player" actionLabel="Remove"
+                    actionType="remove" (action)="removePlayer($event)">
+                </app-player-card>
+                <div class="empty-slot" *ngIf="goalkeepers().length === 0">Select Goalkeeper</div>
+            </div>
+        </div>
+    </div>
+</div>

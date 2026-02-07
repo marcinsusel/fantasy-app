@@ -1,0 +1,63 @@
+.player-list-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.filters {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.position-filters {
+    display: flex;
+    background: #f3f4f6;
+    padding: 4px;
+    border-radius: 8px;
+    gap: 4px;
+}
+
+.position-filters button {
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #4b5563;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.position-filters button:hover {
+    background: #e5e7eb;
+}
+
+.position-filters button.active {
+    background: white;
+    color: #3b82f6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.player-grid {
+    padding: 16px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}
