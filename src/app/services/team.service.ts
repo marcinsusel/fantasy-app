@@ -36,11 +36,13 @@ export class TeamService {
         const fwd = this.attackerCount();
         const total = this.totalPlayers();
 
+        console.log({ total, gk, def, mid, fwd });
+
         return total === 11 &&
             gk === 1 &&
             def >= 3 && def <= 5 &&
             mid >= 4 && mid <= 5 &&
-            fwd >= 3 && fwd <= 4;
+            fwd >= 1 && fwd <= 3;
     });
 
     readonly currentCost = computed(() =>
@@ -58,7 +60,14 @@ export class TeamService {
         if (gk > 1) return 'Only 1 Goalkeeper allowed';
         if (def > 5) return 'Max 5 Defenders allowed';
         if (mid > 5) return 'Max 5 Midfielders allowed';
-        if (fwd > 4) return 'Max 4 Attackers allowed';
+        if (fwd > 3) return 'Max 3 Attackers allowed';
+
+        if (total === 11) {
+            if (gk !== 1) return 'Need 1 Goalkeeper';
+            if (def < 3) return 'Need at least 3 Defenders';
+            if (mid < 4) return 'Need at least 4 Midfielders';
+            if (fwd < 1) return 'Need at least 1 Attacker';
+        }
 
         return null; // No immediate adding error, but might be incomplete
     });
@@ -84,8 +93,8 @@ export class TeamService {
             alert('You can only select up to 5 Midfielders');
             return;
         }
-        if (player.position === 'FWD' && this.attackerCount() >= 4) {
-            alert('You can only select up to 4 Attackers');
+        if (player.position === 'FWD' && this.attackerCount() >= 3) {
+            alert('You can only select up to 3 Attackers');
             return;
         }
         if (this.totalPlayers() >= 11) {
@@ -109,9 +118,10 @@ export class TeamService {
         return this.http.post<{ id: string }>(this.apiUrl, players);
     }
 
-    loadSquad(id: string): Observable<object> {
-        return this.http.get<Player[]>(`${this.apiUrl}/${id}`).pipe(
-            tap(players => {
+    loadSquad(id: string): Observable<{ players: Player[] }> {
+        return this.http.get<{ players: Player[] }>(`${this.apiUrl}/${id}`).pipe(
+            tap(response => {
+                const players = response.players;
                 // Transform to match local state if needed, or just set it
                 // We need to mark them as selected
                 const selected = players.map(p => ({ ...p, isSelected: true }));
